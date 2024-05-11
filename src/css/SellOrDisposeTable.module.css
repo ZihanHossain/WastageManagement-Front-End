@@ -1,0 +1,10 @@
+.tableInputQty {
+  padding: 3px;
+  width: 50%;
+  border: 1px solid;
+  border-color: #ced4da;
+}
+
+.tableRoot {
+  font-size: 16px; /* Adjust this value to your desired font size for the entire table */
+}

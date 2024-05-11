@@ -1,0 +1,41 @@
+.topSection {
+  position: fixed;
+  height: 10%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #00abe4;
+}
+
+.topSectionLeft {
+  display: flex;
+  justify-content: flex-start;
+  min-width: 60%;
+}
+
+.logo {
+  margin-left: 5%;
+  font-family: "Courier New", Courier, monospace;
+  color: white;
+  font-size: 230%;
+  font-weight: 900;
+  /* margin-left: 20%;
+    width: 30%;
+    height: auto; */
+}
+
+.topSectionRight {
+  display: flex;
+  justify-content: flex-end;
+  min-width: 30%;
+}
+
+.stickyHeader {
+  position: fixed;
+  width: 100%;
+  /* top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;  */
+}

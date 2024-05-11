@@ -1,23 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import { BrowserRouter, useNavigate, useRoutes } from "react-router-dom";
+import MainLayout from "./screens/MainLayout";
+import LoginScreen from "./screens/LoginScreen";
 
+const Routes = () => {
+  const routes = useRoutes([
+    { path: "/home", element: <MainLayout /> },
+    { path: "/", element: <LoginScreen /> },
+    // Add more routes as needed
+  ]);
+
+  return routes;
+};
+
+//App starts from here.
 function App() {
+  document.title = "SQ Wastage Management";
+  localStorage.setItem("server-ip", "10.12.3.128:3009");
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <BrowserRouter>
+        <Routes />
+      </BrowserRouter>
     </div>
   );
 }

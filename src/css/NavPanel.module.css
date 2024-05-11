@@ -1,0 +1,74 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+.navSection {
+  position: fixed;
+  top: 10%;
+  width: 15%;
+  height: 100%;
+  background-color: #e9f1fa;
+  /* border-top-right-radius: 30px; */
+}
+
+@media (max-width: 1366px) {
+  .navSection {
+    font-size: 12px;
+  }
+}
+
+.navUserName {
+  display: flex;
+  padding: 10%;
+  padding-left: 7%;
+  align-items: center;
+}
+
+.navLink {
+  display: flex;
+  padding: 5%;
+  padding-left: 10%;
+  align-items: center;
+  text-decoration: none;
+}
+
+@media (max-width: 1366px) {
+  .navLink {
+    padding: 4%;
+  }
+}
+
+.navLinkDropdown {
+  display: flex;
+  padding: 5%;
+  padding-left: 15%;
+  align-items: center;
+  text-decoration: none;
+}
+
+.navlinkDropdown:hover {
+  background-color: beige;
+}
+
+.navLink:hover {
+  background-color: beige;
+}
+
+.navLinkText {
+  margin-left: 5%;
+  color: #008000;
+}
+
+.navLinkSelected {
+  display: flex;
+  padding: 5%;
+  padding-left: 10%;
+  align-items: center;
+  text-decoration: none;
+  background-color: white;
+  border-right: 5px solid #00abe4; /* Added 'solid' and '1px' for example */
+  border-top-right-radius: 1000px;
+  border-bottom-right-radius: 1000px;
+}
