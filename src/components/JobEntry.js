@@ -251,7 +251,7 @@ function JobEntry() {
   const getTapsOrders = async (order) => {
     try {
       const response = await fetch(
-        `http://10.12.3.128:3010/tapsConnect/get_taps_order`,
+        `http://10.12.3.182:3010/tapsConnect/get_taps_order`,
         {
           method: "POST",
           headers: {

@@ -17,7 +17,7 @@ const Routes = () => {
 //App starts from here.
 function App() {
   document.title = "SQ Wastage Management";
-  localStorage.setItem("server-ip", "10.12.3.128:3009");
+  localStorage.setItem("server-ip", "10.12.3.182:3009");
   return (
     <div className="App">
       <BrowserRouter>
