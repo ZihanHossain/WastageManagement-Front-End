@@ -1,0 +1,23 @@
+.mainSection {
+  margin: 1%;
+}
+
+.row {
+  display: flex;
+  justify-content: space-around;
+}
+
+.heading {
+  margin-bottom: 1%;
+}
+
+.headingText {
+  font-weight: bold;
+  font-size: large;
+  color: #008000;
+}
+
+.reportCard {
+  width: 20%;
+  margin: 2%;
+}

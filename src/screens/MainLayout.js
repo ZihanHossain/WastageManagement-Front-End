@@ -7,6 +7,7 @@ import TransferToHr from "../components/TransferToHr";
 import { NotificationContainer } from "react-notifications";
 import SellOrDispose from "../components/SellOrDispose";
 import { useNavigate } from "react-router-dom";
+import Reports from "../components/Reports";
 
 function MainLayout() {
   const navigate = useNavigate();
@@ -37,6 +38,8 @@ function MainLayout() {
                 return <TransferToHr />;
               case renderedComponent === "sell_dispose":
                 return <SellOrDispose />;
+              case renderedComponent === "reports":
+                return <Reports />;
               default:
                 return null;
             }

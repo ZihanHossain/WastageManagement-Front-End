@@ -28,7 +28,6 @@ const LoginScreen = () => {
         }
       );
       const json = await response.json();
-      console.log(json);
       if (json.length < 1) {
         setMsg("Wrong Username or password!");
       } else {

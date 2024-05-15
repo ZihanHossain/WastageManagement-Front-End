@@ -6,6 +6,7 @@ import HomeIcon from "@mui/icons-material/Home";
 import AddCircleOutlinedIcon from "@mui/icons-material/AddCircleOutlined";
 import SellIcon from "@mui/icons-material/Sell";
 import MoveUpIcon from "@mui/icons-material/MoveUp";
+import DocumentScannerIcon from "@mui/icons-material/DocumentScanner";
 
 const NavPanel = ({ onSetRender }) => {
   const [navSelected, setNavSelected] = useState("");
@@ -66,6 +67,15 @@ const NavPanel = ({ onSetRender }) => {
       >
         <SellIcon sx={{ color: "#00ABE4", fontSize: 20 }} />
         <div className={styles.navLinkText}>Sell / Dispose</div>
+      </Link>
+      <Link
+        onClick={() => handleNavClick("reports")}
+        className={
+          navSelected === "reports" ? styles.navLinkSelected : styles.navLink
+        }
+      >
+        <DocumentScannerIcon sx={{ color: "#00ABE4", fontSize: 20 }} />
+        <div className={styles.navLinkText}>Reports</div>
       </Link>
       {/* <Link
         to="/add_high_defects"

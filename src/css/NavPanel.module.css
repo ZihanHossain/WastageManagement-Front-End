@@ -9,7 +9,7 @@ body {
   top: 10%;
   width: 15%;
   height: 100%;
-  background-color: #e9f1fa;
+  background-color: #dae0da;
   /* border-top-right-radius: 30px; */
 }
 
@@ -54,11 +54,13 @@ body {
 
 .navLink:hover {
   background-color: beige;
+  color: white;
 }
 
 .navLinkText {
   margin-left: 5%;
-  color: #008000;
+  color: #95775d;
+  font-size: medium;
 }
 
 .navLinkSelected {

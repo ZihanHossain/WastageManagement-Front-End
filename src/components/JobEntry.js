@@ -423,6 +423,9 @@ function JobEntry() {
 
   return (
     <div className={styles.mainSection}>
+      <div className={styles.heading}>
+        <span className={styles.headingText}>Create Job</span>
+      </div>
       <div className={styles.row}>
         <div className={styles.rowItem}>
           <div>Date:</div>

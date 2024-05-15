@@ -2,6 +2,16 @@
   margin: 1%;
 }
 
+.heading {
+  margin-bottom: 1%;
+}
+
+.headingText {
+  font-weight: bold;
+  font-size: large;
+  color: #008000;
+}
+
 .row {
   display: flex;
   justify-content: space-around;
