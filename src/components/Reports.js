@@ -74,6 +74,25 @@ function Reports() {
             </Card>
           </Link>
         </div>
+        <div className={styles.reportCard}>
+          <Link to="http://administrator:masterpass@10.12.3.182/ReportServer/Pages/ReportViewer.aspx?%2fWastage+Management+System%2fSection-wise+Daily+Wastage+Disposal+Declaration&rs:Command=Render">
+            <Card sx={{ maxWidth: 345 }}>
+              <CardActionArea>
+                <CardMedia
+                  component="img"
+                  height="140"
+                  image="https://1.bp.blogspot.com/-nzm908Pfunw/VqXgeRNp4LI/AAAAAAAACJI/wgeVntLSIT8/w1200-h630-p-k-no-nu/status-report.png"
+                  alt="green iguana"
+                />
+                <CardContent>
+                  <Typography gutterBottom variant="h8" component="div">
+                    Section-wise Daily Wastage Disposal Declaration
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+            </Card>
+          </Link>
+        </div>
       </div>
     </div>
   );
