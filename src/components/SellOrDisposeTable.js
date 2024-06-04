@@ -80,9 +80,9 @@ function SellOrDisposeTable({ handleQtyChange, handlePriceChange }) {
             <TableCell sx={{ fontSize: "10px", padding: "10px 7px" }}>
               Discard Qty
             </TableCell>
-            <TableCell sx={{ fontSize: "10px", padding: "10px 7px" }}>
+            {/* <TableCell sx={{ fontSize: "10px", padding: "10px 7px" }}>
               Price
-            </TableCell>
+            </TableCell> */}
           </TableRow>
         </TableHead>
         <TableBody>
@@ -199,7 +199,7 @@ function SellOrDisposeTable({ handleQtyChange, handlePriceChange }) {
                     }
                   />
                 </TableCell>
-                <TableCell
+                {/* <TableCell
                   sx={{
                     fontSize: "10px",
                     fontWeight: "bold",
@@ -212,7 +212,7 @@ function SellOrDisposeTable({ handleQtyChange, handlePriceChange }) {
                     // value={""}
                     onChange={(event) => handlePriceChange(event, job.jdId)}
                   />
-                </TableCell>
+                </TableCell> */}
               </TableRow>
             );
           })}

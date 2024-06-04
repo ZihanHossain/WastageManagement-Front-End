@@ -59,12 +59,22 @@ function SellOrDispose() {
     if (event.target.value > 0) {
       if (sellDetails.length < 1) {
         setSellDetails([
-          { jobDetailsId: id, sellQty: event.target.value, availableQty },
+          {
+            jobDetailsId: id,
+            sellQty: event.target.value,
+            availableQty,
+            price: "0",
+          },
         ]);
       } else {
         const newData = sellDetails.map((obj) => {
           if (obj.jobDetailsId === id) {
-            return { ...obj, sellQty: event.target.value, availableQty };
+            return {
+              ...obj,
+              sellQty: event.target.value,
+              availableQty,
+              price: "0",
+            };
           } else {
             return obj;
           }
@@ -76,6 +86,7 @@ function SellOrDispose() {
             jobDetailsId: id,
             sellQty: event.target.value,
             availableQty: availableQty,
+            price: "0",
           });
         }
 
