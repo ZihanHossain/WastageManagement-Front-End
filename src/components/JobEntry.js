@@ -97,7 +97,7 @@ function JobEntry() {
     if (event.target.value >= 0 || event.target.value == "") {
       const updatedJobDetails = jobDetails.map((defect) => {
         if (defect.defect_code === defectCode) {
-          return { ...defect, qty: parseInt(event.target.value) };
+          return { ...defect, qty: parseFloat(event.target.value) };
         }
         return defect;
       });
