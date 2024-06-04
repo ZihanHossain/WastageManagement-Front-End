@@ -77,6 +77,14 @@ function TransferToHrTableRow(props) {
       if (response.status === 200) {
         handleTrigger();
         getJobDetails();
+        let tempDetails = [];
+        tempDetails = transferDetails.map((item) => {
+          return {
+            ...item,
+            availableQty: item.availableQty - item.transferQty,
+          };
+        });
+        setTransferDetails(tempDetails);
         NotificationManager.success("Transfer Successful", "Transfer");
       }
     } catch (error) {
@@ -130,7 +138,7 @@ function TransferToHrTableRow(props) {
       const isQtyMoreThanAvailableQty = transferDetails.every(
         (item) => item.transferQty <= item.availableQty
       );
-
+      console.log(transferDetails);
       isQtyMoreThanAvailableQty
         ? transfer()
         : NotificationManager.error(
