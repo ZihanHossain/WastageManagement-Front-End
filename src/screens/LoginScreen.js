@@ -28,42 +28,24 @@ const LoginScreen = () => {
         }
       );
       const json = await response.json();
+      // console.log(json); //json[0] is user info, json[1] is section mapping, json[2] is permission mapping
       if (json.length < 1) {
         setMsg("Wrong Username or password!");
       } else {
-        setMsg("");
+        setMsg(""); //set no error message
+
+        //storing necessary information is localStorage of browser for later use
+
         localStorage.setItem("user_id", json[0].id);
         localStorage.setItem("user_name", json[0].user_name);
         localStorage.setItem(
           "full_name",
           json[0].first_name + " " + json[0].last_name
         );
+        const sectionIds = json[1].map((item) => item.section_id);
+        localStorage.setItem("mappedSections", sectionIds);
         navigate("/home");
       }
-      //   if (json < 1) {
-      //     setMsg("Wrong Username or password!");
-      //   } else {
-      //     const response = await fetch(
-      //       `http://${localStorage.getItem(
-      //         "server-ip"
-      //       )}/inspaction/get_permissions`,
-      //       {
-      //         method: "POST",
-      //         headers: {
-      //           Accept: "application/json",
-      //           "Content-Type": "application/json",
-      //         },
-      //         body: JSON.stringify({
-      //           Id: json[0].Id,
-      //         }),
-      //       }
-      //     );
-      //     const json1 = await response.json();
-      //     localStorage.setItem("permissions", JSON.stringify(json1));
-      //     localStorage.setItem("token", eId);
-      //     localStorage.setItem("name", json[0].user_name);
-      //     navigate("/home");
-      //   }
     } catch (error) {
       console.error(error);
     }

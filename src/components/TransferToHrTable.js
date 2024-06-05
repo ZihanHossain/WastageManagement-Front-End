@@ -28,6 +28,7 @@ function TransferToHrTable() {
         }
       );
       const json = await response.json();
+      console.log(json);
       setJobs(json);
     } catch (error) {
       console.error(error);
@@ -56,13 +57,15 @@ function TransferToHrTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {jobs.map((job) => (
-            <TransferToHrTableRow
-              key={job.id}
-              job={job}
-              handleTrigger={triggerTransfer}
-            />
-          ))}
+          {jobs.map((job) =>
+            localStorage.getItem("mappedSections").includes(job.section_id) ? (
+              <TransferToHrTableRow
+                key={job.id}
+                job={job}
+                handleTrigger={triggerTransfer}
+              />
+            ) : null
+          )}
         </TableBody>
       </Table>
     </TableContainer>
