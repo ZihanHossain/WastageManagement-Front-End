@@ -97,7 +97,11 @@ function JobEntry() {
     if (event.target.value >= 0 || event.target.value == "") {
       const updatedJobDetails = jobDetails.map((defect) => {
         if (defect.defect_code === defectCode) {
-          return { ...defect, qty: parseFloat(event.target.value) };
+          return {
+            ...defect,
+            qty:
+              event.target.value == "" ? null : parseFloat(event.target.value),
+          };
         }
         return defect;
       });
@@ -144,6 +148,7 @@ function JobEntry() {
   };
 
   const handleCreateJob = () => {
+    //All the required infomation validation logic are written here.
     if (article.length < 1) {
       NotificationManager.error("Select an article", "Article");
     } else if (color.length < 1) {
@@ -154,8 +159,26 @@ function JobEntry() {
       NotificationManager.error("Select a section", "Section");
     } else if (jobType.length < 1) {
       NotificationManager.error("Select a type", "Type");
+    } else if (orderNumber.length < 1) {
+      NotificationManager.error(
+        "Order Number can not be empty",
+        "Order Number"
+      );
     } else {
-      createJob();
+      let emptyJob = true;
+      jobDetails.forEach((details) => {
+        if (details.qty != null) {
+          emptyJob = false;
+        }
+      });
+      if (emptyJob) {
+        NotificationManager.error(
+          "Atlest one defect qty has to be more than 0",
+          "Defects"
+        );
+      } else {
+        createJob();
+      }
     }
   };
 
@@ -211,7 +234,6 @@ function JobEntry() {
         }
       );
       const json = await response.json();
-      console.log(json);
       if (json.length > 0) {
         setArticle(json[0].fabric_yarn_name);
         setColor(json[0].color_name);
