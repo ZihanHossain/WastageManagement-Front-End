@@ -13,6 +13,7 @@ function SellOrDispose() {
   const [customer, setCustomer] = useState(1);
   const [sellDetails, setSellDetails] = useState([]);
   const [refreshTable, setRefreshTable] = useState(false);
+  const [userPermissions, setUserPermissions] = useState([]);
   const [authorized, setAuthorized] = useState(false);
 
   // const toggleRefreshTable = () => {
