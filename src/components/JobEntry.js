@@ -42,6 +42,8 @@ function JobEntry() {
   const [jobType, setJobType] = useState(""); //This variable is for -> select opion of job type eg: Wastage or Rejection
   const [jobDetails, setJobDetails] = useState([]); //This variable will hold all the defects and it will uopdate according to catagory and job type.
   const [remarks, setRemarks] = useState("");
+  const [userPermissions, setUserPermissions] = useState([]);
+  const [authorized, setAuthorized] = useState(false);
 
   const changeOrderType = (type) => {
     setOrderType(type);
@@ -442,6 +444,23 @@ function JobEntry() {
       getDefects();
     }
   }, [defectCategory, jobType]); //after selecting type getDefects() will be called
+
+  useEffect(() => {
+    const permissions = localStorage
+      .getItem("userPermission")
+      ?.split(/\s*,\s*/);
+
+    if (permissions && permissions.includes("create_job_screen")) {
+      setUserPermissions(permissions);
+      setAuthorized(true);
+    } else {
+      setAuthorized(false);
+    }
+  }, []);
+
+  if (!authorized) {
+    return <div>You do not have permission for this screen!</div>;
+  }
 
   return (
     <div className={styles.mainSection}>

@@ -13,6 +13,7 @@ function SellOrDispose() {
   const [customer, setCustomer] = useState(1);
   const [sellDetails, setSellDetails] = useState([]);
   const [refreshTable, setRefreshTable] = useState(false);
+  const [authorized, setAuthorized] = useState(false);
 
   // const toggleRefreshTable = () => {
   //   setRefreshTable(!refreshTable);
@@ -183,8 +184,22 @@ function SellOrDispose() {
   };
 
   useEffect(() => {
-    getCustomers();
+    const permissions = localStorage
+      .getItem("userPermission")
+      ?.split(/\s*,\s*/);
+
+    if (permissions && permissions.includes("sell_or_dispose_screen")) {
+      setUserPermissions(permissions);
+      setAuthorized(true);
+      getCustomers();
+    } else {
+      setAuthorized(false);
+    }
   }, []);
+
+  if (!authorized) {
+    return <div>You do not have permission for this screen!</div>;
+  }
 
   return (
     <div className={styles.mainSection}>

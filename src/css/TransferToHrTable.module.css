@@ -1,0 +1,23 @@
+.rowItem {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2%;
+}
+
+.legend {
+  margin-right: 1%;
+}
+
+.rowItemDropdown {
+  width: 14%;
+  padding: 0.3%;
+  border-radius: 5px;
+  border-color: #00abe4;
+}
+
+.rowItemDropdown:focus {
+  width: 14%;
+  padding: 0.3%;
+  border-radius: 5px;
+  border-color: #00abe4;
+}

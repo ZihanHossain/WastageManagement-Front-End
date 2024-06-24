@@ -44,6 +44,8 @@ const LoginScreen = () => {
         );
         const sectionIds = json[1].map((item) => item.section_id);
         localStorage.setItem("mappedSections", sectionIds);
+        const userPermission = json[2].map((item) => item.task_name);
+        localStorage.setItem("userPermission", userPermission);
         navigate("/home");
       }
     } catch (error) {
