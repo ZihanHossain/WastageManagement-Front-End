@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import { BrowserRouter, useNavigate, useRoutes } from "react-router-dom";
+import { BrowserRouter, useRoutes } from "react-router-dom";
 import MainLayout from "./screens/MainLayout";
 import LoginScreen from "./screens/LoginScreen";
 

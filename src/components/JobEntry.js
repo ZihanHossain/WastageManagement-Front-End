@@ -42,7 +42,6 @@ function JobEntry() {
   const [jobType, setJobType] = useState(""); //This variable is for -> select opion of job type eg: Wastage or Rejection
   const [jobDetails, setJobDetails] = useState([]); //This variable will hold all the defects and it will uopdate according to catagory and job type.
   const [remarks, setRemarks] = useState("");
-  const [userPermissions, setUserPermissions] = useState([]);
   const [authorized, setAuthorized] = useState(false);
 
   const changeOrderType = (type) => {
@@ -96,13 +95,13 @@ function JobEntry() {
   };
 
   const handleQtyChange = (event, defectCode) => {
-    if (event.target.value >= 0 || event.target.value == "") {
+    if (event.target.value >= 0 || event.target.value === "") {
       const updatedJobDetails = jobDetails.map((defect) => {
         if (defect.defect_code === defectCode) {
           return {
             ...defect,
             qty:
-              event.target.value == "" ? null : parseFloat(event.target.value),
+              event.target.value === "" ? null : parseFloat(event.target.value),
           };
         }
         return defect;
@@ -440,7 +439,7 @@ function JobEntry() {
   }, []);
 
   useEffect(() => {
-    if (jobType != "") {
+    if (jobType !== "") {
       getDefects();
     }
   }, [defectCategory, jobType]); //after selecting type getDefects() will be called
@@ -451,7 +450,6 @@ function JobEntry() {
       ?.split(/\s*,\s*/);
 
     if (permissions && permissions.includes("create_job_screen")) {
-      setUserPermissions(permissions);
       setAuthorized(true);
     } else {
       setAuthorized(false);
@@ -479,7 +477,7 @@ function JobEntry() {
           <div className={styles.rowItemInput}>
             <button
               className={
-                orderType == 1
+                orderType === 1
                   ? styles.orderTypeButtonSelected
                   : styles.orderTypeButton
               }
@@ -489,7 +487,7 @@ function JobEntry() {
             </button>
             <button
               className={
-                orderType == 2
+                orderType === 2
                   ? styles.orderTypeButtonSelected
                   : styles.orderTypeButton
               }
@@ -499,7 +497,7 @@ function JobEntry() {
             </button>
             <button
               className={
-                orderType == 3
+                orderType === 3
                   ? styles.orderTypeButtonSelected
                   : styles.orderTypeButton
               }
@@ -513,15 +511,16 @@ function JobEntry() {
           <div>
             Order Number: <span> *</span>
           </div>
-          {orderType == 1 ? (
+          {orderType === 1 ? (
             <div className={styles.rowItemDropdown}>
               <SearchableDropdown
                 options={orderNumbers}
                 label={"orderNo"}
                 id={"id"}
                 selectedVal={orderNumber}
-                handleChange={handleOrderNumberChangeTaps}
-                onSearch={getTapsOrders}
+                minSearchChar={4} //Minimum character to initiate search.
+                handleChange={handleOrderNumberChangeTaps} //Function to trigger when minimum character has as been typed.
+                onSearch={getTapsOrders} //Function to call when then the option is selected.
               />
             </div>
           ) : (
@@ -538,7 +537,7 @@ function JobEntry() {
           <div>
             Fabric/Yarn: <span> *</span>
           </div>
-          {orderType == 1 || orderNumberExists ? (
+          {orderType === 1 || orderNumberExists ? (
             <div className={styles.rowItemInput}>{article}</div>
           ) : (
             <div className={styles.rowItemDropdown}>
@@ -549,6 +548,7 @@ function JobEntry() {
                 selectedVal={article}
                 handleChange={handleArticleChange}
                 onSearch={getArticles}
+                minSearchChar={2}
               />
               <button
                 className={styles.dropdownCreateButton}
@@ -565,7 +565,7 @@ function JobEntry() {
           <div>
             Color: <span> *</span>
           </div>
-          {orderType == 1 || orderNumberExists ? (
+          {orderType === 1 || orderNumberExists ? (
             <div className={styles.rowItemInput}>{color}</div>
           ) : (
             <div className={styles.rowItemDropdown}>
@@ -576,6 +576,7 @@ function JobEntry() {
                 selectedVal={color}
                 handleChange={handleColorChange}
                 onSearch={getColors}
+                minSearchChar={2}
               />
               <button
                 className={styles.dropdownCreateButton}

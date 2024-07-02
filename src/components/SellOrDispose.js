@@ -2,10 +2,7 @@ import React, { useEffect, useState } from "react";
 import styles from "../css/SellOrDispose.module.css";
 import SellOrDisposeTable from "./SellOrDisposeTable";
 import { Button } from "@mui/material";
-import {
-  NotificationContainer,
-  NotificationManager,
-} from "react-notifications";
+import { NotificationManager } from "react-notifications";
 
 function SellOrDispose() {
   const [type, setType] = useState(1); //1 = Dispose, 2 = Sell. By default order type is selected to Dispose.
@@ -22,7 +19,7 @@ function SellOrDispose() {
 
   const changeOrderType = (type) => {
     setType(type);
-    if (type == 2) {
+    if (type === 2) {
       getCustomers(type);
     }
   };
@@ -147,8 +144,8 @@ function SellOrDispose() {
           }),
         }
       );
-      const json = await response.json();
-      if (response.status == 201) {
+      // const json = await response.json();
+      if (response.status === 201) {
         NotificationManager.success("Invoice Created Successfully", "Success");
         // toggleRefreshTable();
         setRefreshTable(!refreshTable);
@@ -212,7 +209,7 @@ function SellOrDispose() {
           <div className={styles.rowItemInput}>
             <button
               className={
-                type == 1
+                type === 1
                   ? styles.orderTypeButtonSelected
                   : styles.orderTypeButton
               }
@@ -222,7 +219,7 @@ function SellOrDispose() {
             </button>
             <button
               className={
-                type == 2
+                type === 2
                   ? styles.orderTypeButtonSelected
                   : styles.orderTypeButton
               }
@@ -232,7 +229,7 @@ function SellOrDispose() {
             </button>
           </div>
         </div>
-        {type == 2 ? (
+        {type === 2 ? (
           <div className={styles.rowItem}>
             <div>
               Customer: <span> *</span>

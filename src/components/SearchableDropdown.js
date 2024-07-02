@@ -9,6 +9,7 @@ const SearchableDropdown = ({
   selectedVal,
   onSearch,
   handleChange,
+  minSearchChar,
 }) => {
   const [query, setQuery] = useState("");
   const [isOpen, setIsOpen] = useState(false);
@@ -18,7 +19,6 @@ const SearchableDropdown = ({
   useEffect(() => {
     document.addEventListener("click", toggle);
     return () => document.removeEventListener("click", toggle);
-    console.log(options);
   }, []);
 
   const selectOption = (option) => {
@@ -56,7 +56,7 @@ const SearchableDropdown = ({
             name="searchTerm"
             placeholder="Search..."
             onChange={(e) => {
-              if (e.target.value.length > 3) {
+              if (e.target.value.length >= minSearchChar) {
                 onSearch(e.target.value);
               }
               setQuery(e.target.value);
