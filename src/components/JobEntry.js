@@ -57,10 +57,15 @@ function JobEntry() {
       NotificationManager.error("Article can not be empty", "Article");
     } else {
       let response = await createArticle();
-      console.log(response[0]);
-      if (response[0] > 0) {
-        NotificationManager.success("Article Created", "Article");
-        getArticles();
+      if (response[1] > 0) {
+        if (response[0] > 0) {
+          NotificationManager.success("Article Created", "Article");
+          getArticles();
+        } else {
+          NotificationManager.error("Article not created.", "Article");
+        }
+      } else {
+        NotificationManager.error("Article already exists!", "Article");
       }
     }
   };
@@ -74,10 +79,15 @@ function JobEntry() {
       NotificationManager.error("Color can not be empty", "Color");
     } else {
       let response = await createColor();
-      console.log(response[0]);
-      if (response[0] > 0) {
-        NotificationManager.success("Color Created", "Color");
-        getColors();
+      if (response[1] > 0) {
+        if (response[0] > 0) {
+          NotificationManager.success("Color Created", "Color");
+          getColors();
+        } else {
+          NotificationManager.error("Color not created", "Color");
+        }
+      } else {
+        NotificationManager.error("Color already exists!", "Color");
       }
     }
   };
