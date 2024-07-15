@@ -167,7 +167,7 @@ function TransferToHrTableRow(props) {
         <TableCell>{job.section_name}</TableCell>
         <TableCell>{job.type_name}</TableCell>
         <TableCell>{job.active_qty.toFixed(2)}</TableCell>
-        <TableCell>{job.last_name}</TableCell>
+        <TableCell>{`${job.first_name} ${job.last_name}`}</TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={7}>
