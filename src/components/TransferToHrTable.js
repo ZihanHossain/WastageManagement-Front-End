@@ -8,7 +8,6 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Typography,
 } from "@mui/material";
 import TransferToHrTableRow from "./TransferToHrTableRow";
 
@@ -67,13 +66,12 @@ function TransferToHrTable() {
           </option>
           {permittedSections.map((option) => {
             for (const job of jobs) {
-              if (job.section_id == option) {
+              if (job.section_id === option) {
                 return (
                   <option key={option} value={option}>
                     {job.section_name}
                   </option>
                 );
-                break;
               }
             }
           })}
@@ -90,6 +88,7 @@ function TransferToHrTable() {
               <TableCell>Section</TableCell>
               <TableCell>Type</TableCell>
               <TableCell>Remaining Amount</TableCell>
+              <TableCell>Created By</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

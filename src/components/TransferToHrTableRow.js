@@ -166,10 +166,11 @@ function TransferToHrTableRow(props) {
         <TableCell>{job.job_number}</TableCell>
         <TableCell>{job.section_name}</TableCell>
         <TableCell>{job.type_name}</TableCell>
-        <TableCell>{job.active_qty}</TableCell>
+        <TableCell>{job.active_qty.toFixed(2)}</TableCell>
+        <TableCell>{job.last_name}</TableCell>
       </TableRow>
       <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={7}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box sx={{ margin: 1 }}>
               <Typography variant="h6" gutterBottom component="div">
@@ -192,7 +193,7 @@ function TransferToHrTableRow(props) {
                       </TableCell>
                       <TableCell>{item.qty}</TableCell>
                       <TableCell align="right">
-                        {item.qty - item.transferred_to_hr}
+                        {(item.qty - item.transferred_to_hr).toFixed(2)}
                       </TableCell>
                       <TableCell align="right">
                         <input
