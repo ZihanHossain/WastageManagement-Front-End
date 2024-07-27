@@ -138,7 +138,6 @@ function TransferToHrTableRow(props) {
       const isQtyMoreThanAvailableQty = transferDetails.every(
         (item) => item.transferQty <= item.availableQty
       );
-      console.log(transferDetails);
       isQtyMoreThanAvailableQty
         ? transfer()
         : NotificationManager.error(

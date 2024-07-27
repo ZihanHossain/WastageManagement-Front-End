@@ -10,8 +10,9 @@ import {
   TableRow,
 } from "@mui/material";
 
-function SellOrDisposeTable({ handleQtyChange, handlePriceChange }) {
+function SellOrDisposeTable({ date, handleQtyChange }) {
   const [jobs, setJobs] = useState([]);
+  const [filteredJobs, setFilteredJobs] = useState([]);
 
   const handleTableQtyChange = (event, jdId, availableQty) => {
     handleQtyChange(event, jdId, availableQty);
@@ -33,6 +34,7 @@ function SellOrDisposeTable({ handleQtyChange, handlePriceChange }) {
       );
       const json = await response.json();
       setJobs(json);
+      setFilteredJobs(json);
     } catch (error) {
       console.error(error);
     }
@@ -41,6 +43,11 @@ function SellOrDisposeTable({ handleQtyChange, handlePriceChange }) {
   useEffect(() => {
     getHrJobPending();
   }, []);
+
+  useEffect(() => {
+    const filteredObjects = jobs.filter((job) => job.created_date === date);
+    setFilteredJobs(filteredObjects);
+  }, [date]);
 
   return (
     <TableContainer component={Paper}>
@@ -86,7 +93,7 @@ function SellOrDisposeTable({ handleQtyChange, handlePriceChange }) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {jobs.map((job) => {
+          {filteredJobs.map((job) => {
             return (
               <TableRow>
                 <TableCell

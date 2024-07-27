@@ -66,7 +66,7 @@ function TransferToHrTable() {
           </option>
           {permittedSections.map((option) => {
             for (const job of jobs) {
-              if (job.section_id === option) {
+              if (job.section_id == option) {
                 return (
                   <option key={option} value={option}>
                     {job.section_name}

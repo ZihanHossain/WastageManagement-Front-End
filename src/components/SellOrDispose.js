@@ -3,15 +3,22 @@ import styles from "../css/SellOrDispose.module.css";
 import SellOrDisposeTable from "./SellOrDisposeTable";
 import { Button } from "@mui/material";
 import { NotificationManager } from "react-notifications";
+import DatePicker from "react-datepicker";
+
+import "react-datepicker/dist/react-datepicker.css";
 
 function SellOrDispose() {
   const [type, setType] = useState(1); //1 = Dispose, 2 = Sell. By default order type is selected to Dispose.
   const [customers, setCustomers] = useState([]);
   const [customer, setCustomer] = useState(1);
+  const [sections, setSections] = useState([]);
   const [sellDetails, setSellDetails] = useState([]);
   const [refreshTable, setRefreshTable] = useState(false);
   const [userPermissions, setUserPermissions] = useState([]);
   const [authorized, setAuthorized] = useState(false);
+  const [startDate, setStartDate] = useState("");
+  const [formatedDate, setFormatedDate] = useState("");
+  const [sectionFilter, setSectionFilter] = useState("all");
 
   // const toggleRefreshTable = () => {
   //   setRefreshTable(!refreshTable);
@@ -26,6 +33,10 @@ function SellOrDispose() {
 
   const changeCustomer = (event) => {
     setCustomer(event.target.value);
+  };
+
+  const changeSectionFilter = (event) => {
+    setSectionFilter(event.target.value);
   };
 
   const onSellPress = () => {
@@ -96,33 +107,33 @@ function SellOrDispose() {
     }
   };
 
-  const handlePriceChange = (event, id) => {
-    if (event.target.value > 0) {
-      if (sellDetails.length < 1) {
-        setSellDetails([{ jobDetailsId: id, price: event.target.value }]);
-      } else {
-        const newData = sellDetails.map((obj) => {
-          if (obj.jobDetailsId === id) {
-            return { ...obj, price: event.target.value };
-          } else {
-            return obj;
-          }
-        });
+  // const handlePriceChange = (event, id) => {
+  //   if (event.target.value > 0) {
+  //     if (sellDetails.length < 1) {
+  //       setSellDetails([{ jobDetailsId: id, price: event.target.value }]);
+  //     } else {
+  //       const newData = sellDetails.map((obj) => {
+  //         if (obj.jobDetailsId === id) {
+  //           return { ...obj, price: event.target.value };
+  //         } else {
+  //           return obj;
+  //         }
+  //       });
 
-        const existingObj = newData.find((obj) => obj.jobDetailsId === id);
-        if (!existingObj) {
-          newData.push({
-            jobDetailsId: id,
-            price: event.target.value,
-          });
-        }
+  //       const existingObj = newData.find((obj) => obj.jobDetailsId === id);
+  //       if (!existingObj) {
+  //         newData.push({
+  //           jobDetailsId: id,
+  //           price: event.target.value,
+  //         });
+  //       }
 
-        setSellDetails(newData);
-      }
-    } else {
-      event.target.value = "";
-    }
-  };
+  //       setSellDetails(newData);
+  //     }
+  //   } else {
+  //     event.target.value = "";
+  //   }
+  // };
 
   const createInvoice = async () => {
     try {
@@ -181,6 +192,41 @@ function SellOrDispose() {
     }
   };
 
+  const getSections = async (type1) => {
+    try {
+      const response = await fetch(
+        `http://${localStorage.getItem(
+          "server-ip"
+        )}/sellOrDispose/get_sections`,
+        {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const json = await response.json();
+      setSections(json);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const formateDate = (date) => {
+    const startDate = new Date(date);
+    const year = startDate.getFullYear();
+    const month = String(startDate.getMonth() + 1).padStart(2, "0"); // Months are zero-based, so add 1
+    const day = String(startDate.getDate()).padStart(2, "0");
+
+    return `${year}-${month}-${day}`;
+  };
+
+  const handleDateChange = (date) => {
+    setStartDate(date);
+    setFormatedDate(formateDate(date));
+  };
+
   useEffect(() => {
     const permissions = localStorage
       .getItem("userPermission")
@@ -190,6 +236,7 @@ function SellOrDispose() {
       setUserPermissions(permissions);
       setAuthorized(true);
       getCustomers();
+      getSections();
     } else {
       setAuthorized(false);
     }
@@ -201,6 +248,22 @@ function SellOrDispose() {
 
   return (
     <div className={styles.mainSection}>
+      <div className={styles.sectionNormal}>
+        <div className={styles.legend}>
+          <div className={styles.legendText}>Filters</div>
+        </div>
+        <div className={styles.rowNormal}>
+          <div className={styles.rowItem}>
+            <div>Date:</div>
+            <DatePicker
+              selected={startDate}
+              onChange={(date) => {
+                handleDateChange(date);
+              }}
+            />
+          </div>
+        </div>
+      </div>
       <div className={styles.row}>
         <div className={styles.rowItem}>
           <div>
@@ -248,6 +311,28 @@ function SellOrDispose() {
             </select>
           </div>
         ) : null}
+        <div className={styles.rowItem}>
+          <div>
+            Section: <span> *</span>
+          </div>
+          <select
+            id="dropdown"
+            value={sectionFilter}
+            onChange={changeSectionFilter}
+            className={styles.rowItemDropdown}
+          >
+            <option key={500} value={"all"}>
+              All
+            </option>
+            {sections.map((option) => {
+              return (
+                <option key={option.id} value={option.id}>
+                  {option.section_name}
+                </option>
+              );
+            })}
+          </select>
+        </div>
 
         <div className={styles.rowItem}>
           <div className={styles.sellButton}>
@@ -261,7 +346,8 @@ function SellOrDispose() {
         <div className={styles.table}>
           <SellOrDisposeTable
             handleQtyChange={handleQtyChange}
-            handlePriceChange={handlePriceChange}
+            // handlePriceChange={handlePriceChange}
+            date={formatedDate}
             key={refreshTable}
           />
         </div>

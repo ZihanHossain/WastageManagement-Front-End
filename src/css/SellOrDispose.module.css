@@ -4,7 +4,12 @@
 
 .row {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+}
+
+.rowNormal {
+  display: flex;
+  justify-content: start;
 }
 
 .table {
@@ -18,9 +23,15 @@
 }
 
 .rowItem {
-  width: 23%;
+  width: 18%;
   margin-bottom: 1.5%;
   align-content: center;
+}
+
+.legendText {
+  color: #95775d;
+  width: 15%;
+  border-bottom: 1px solid;
 }
 
 .rowItemInput {
