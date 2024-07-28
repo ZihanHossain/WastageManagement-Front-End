@@ -8,6 +8,7 @@
 }
 
 .rowNormal {
+  width: 27%;
   display: flex;
   justify-content: start;
 }
@@ -23,8 +24,7 @@
 }
 
 .rowItem {
-  width: 18%;
-  margin-bottom: 1.5%;
+  width: 100%;
   align-content: center;
 }
 
@@ -32,6 +32,10 @@
   color: #95775d;
   width: 15%;
   border-bottom: 1px solid;
+}
+
+.filterSection {
+  display: flex;
 }
 
 .rowItemInput {
@@ -65,7 +69,10 @@
   font-weight: bold;
 }
 
-.sellButton {
+.rowItemSellButton {
+  width: 100%;
+  height: 80%;
+  align-content: center;
   display: flex;
   justify-content: right;
 }

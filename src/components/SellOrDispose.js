@@ -4,8 +4,9 @@ import SellOrDisposeTable from "./SellOrDisposeTable";
 import { Button } from "@mui/material";
 import { NotificationManager } from "react-notifications";
 import DatePicker from "react-datepicker";
+import RecyclingIcon from "@mui/icons-material/Recycling";
 
-import "react-datepicker/dist/react-datepicker.css";
+import "../../node_modules/react-datepicker/dist/react-datepicker.css";
 
 function SellOrDispose() {
   const [type, setType] = useState(1); //1 = Dispose, 2 = Sell. By default order type is selected to Dispose.
@@ -252,94 +253,99 @@ function SellOrDispose() {
         <div className={styles.legend}>
           <div className={styles.legendText}>Filters</div>
         </div>
-        <div className={styles.rowNormal}>
-          <div className={styles.rowItem}>
-            <div>Date:</div>
-            <DatePicker
-              selected={startDate}
-              onChange={(date) => {
-                handleDateChange(date);
-              }}
-            />
+        <div className={styles.filterSection}>
+          <div className={styles.rowNormal}>
+            <div className={styles.rowItem}>
+              <div>Date:</div>
+              <DatePicker
+                selected={startDate}
+                onChange={(date) => {
+                  handleDateChange(date);
+                }}
+              />
+            </div>
+          </div>
+          <div className={styles.rowNormal}>
+            <div className={styles.rowItem}>
+              <div>Section:</div>
+              <select
+                id="dropdown"
+                value={sectionFilter}
+                onChange={changeSectionFilter}
+                className={styles.rowItemDropdown}
+              >
+                <option key={500} value={"all"}>
+                  All
+                </option>
+                {sections.map((option) => {
+                  return (
+                    <option key={option.id} value={option.id}>
+                      {option.section_name}
+                    </option>
+                  );
+                })}
+              </select>
+            </div>
           </div>
         </div>
       </div>
       <div className={styles.row}>
-        <div className={styles.rowItem}>
-          <div>
-            Type: <span> *</span>
-          </div>
-          <div className={styles.rowItemInput}>
-            <button
-              className={
-                type === 1
-                  ? styles.orderTypeButtonSelected
-                  : styles.orderTypeButton
-              }
-              onClick={() => changeOrderType(1)}
-            >
-              Dispose
-            </button>
-            <button
-              className={
-                type === 2
-                  ? styles.orderTypeButtonSelected
-                  : styles.orderTypeButton
-              }
-              onClick={() => changeOrderType(2)}
-            >
-              Sell
-            </button>
+        <div className={styles.rowNormal}>
+          <div className={styles.rowItem}>
+            <div>
+              Type: <span> *</span>
+            </div>
+            <div className={styles.rowItemInput}>
+              <button
+                className={
+                  type === 1
+                    ? styles.orderTypeButtonSelected
+                    : styles.orderTypeButton
+                }
+                onClick={() => changeOrderType(1)}
+              >
+                Dispose
+              </button>
+              <button
+                className={
+                  type === 2
+                    ? styles.orderTypeButtonSelected
+                    : styles.orderTypeButton
+                }
+                onClick={() => changeOrderType(2)}
+              >
+                Sell
+              </button>
+            </div>
           </div>
         </div>
         {type === 2 ? (
-          <div className={styles.rowItem}>
-            <div>
-              Customer: <span> *</span>
+          <div className={styles.rowNormal}>
+            <div className={styles.rowItem}>
+              <div>
+                Customer: <span> *</span>
+              </div>
+              <select
+                id="dropdown"
+                value={customer}
+                onChange={changeCustomer}
+                className={styles.rowItemDropdown}
+              >
+                {customers.map((option) => (
+                  <option key={option.id} value={option.id}>
+                    {option.customer_name}
+                  </option>
+                ))}
+              </select>
             </div>
-            <select
-              id="dropdown"
-              value={customer}
-              onChange={changeCustomer}
-              className={styles.rowItemDropdown}
-            >
-              {customers.map((option) => (
-                <option key={option.id} value={option.id}>
-                  {option.customer_name}
-                </option>
-              ))}
-            </select>
           </div>
         ) : null}
-        <div className={styles.rowItem}>
-          <div>
-            Section: <span> *</span>
-          </div>
-          <select
-            id="dropdown"
-            value={sectionFilter}
-            onChange={changeSectionFilter}
-            className={styles.rowItemDropdown}
-          >
-            <option key={500} value={"all"}>
-              All
-            </option>
-            {sections.map((option) => {
-              return (
-                <option key={option.id} value={option.id}>
-                  {option.section_name}
-                </option>
-              );
-            })}
-          </select>
-        </div>
 
-        <div className={styles.rowItem}>
-          <div className={styles.sellButton}>
-            <Button variant="contained" onClick={onSellPress}>
-              Sell/Dispose
-            </Button>
-          </div>
+        <div className={styles.rowItemSellButton}>
+          <Button variant="contained" onClick={onSellPress}>
+            Dispose -
+            <RecyclingIcon sx={{ color: "#FFFFFF", fontSize: 25 }} />
+          </Button>
         </div>
       </div>
       <div className={styles.row}>
@@ -348,6 +354,7 @@ function SellOrDispose() {
             handleQtyChange={handleQtyChange}
             // handlePriceChange={handlePriceChange}
             date={formatedDate}
+            section={sectionFilter}
             key={refreshTable}
           />
         </div>

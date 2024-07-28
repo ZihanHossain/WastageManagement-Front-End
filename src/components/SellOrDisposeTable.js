@@ -10,7 +10,7 @@ import {
   TableRow,
 } from "@mui/material";
 
-function SellOrDisposeTable({ date, handleQtyChange }) {
+function SellOrDisposeTable({ date, section, handleQtyChange }) {
   const [jobs, setJobs] = useState([]);
   const [filteredJobs, setFilteredJobs] = useState([]);
 
@@ -41,13 +41,26 @@ function SellOrDisposeTable({ date, handleQtyChange }) {
   };
 
   useEffect(() => {
+    // console.log(section);
     getHrJobPending();
   }, []);
 
   useEffect(() => {
-    const filteredObjects = jobs.filter((job) => job.created_date === date);
-    setFilteredJobs(filteredObjects);
-  }, [date]);
+    if ((date !== "") & (section !== "all")) {
+      const filteredObjects = jobs.filter(
+        (job) => (job.created_date == date) & (job.section_id == section)
+      );
+      setFilteredJobs(filteredObjects);
+    } else if (section !== "all") {
+      const filteredObjects = jobs.filter((job) => job.section_id == section);
+      setFilteredJobs(filteredObjects);
+    } else if (date !== "") {
+      const filteredObjects = jobs.filter((job) => job.created_date == date);
+      setFilteredJobs(filteredObjects);
+    } else {
+      setFilteredJobs(jobs);
+    }
+  }, [date, section]);
 
   return (
     <TableContainer component={Paper}>
