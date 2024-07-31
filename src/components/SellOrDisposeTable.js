@@ -10,9 +10,11 @@ import {
   TableRow,
 } from "@mui/material";
 
-function SellOrDisposeTable({ date, section, handleQtyChange }) {
+function SellOrDisposeTable({ date, section, handleQtyChange, totalSellQty }) {
   const [jobs, setJobs] = useState([]);
   const [filteredJobs, setFilteredJobs] = useState([]);
+  const [totalQty, setTotalQty] = useState(0);
+  const [totalAvl, setTotalAvl] = useState(0);
 
   const handleTableQtyChange = (event, jdId, availableQty) => {
     handleQtyChange(event, jdId, availableQty);
@@ -34,38 +36,101 @@ function SellOrDisposeTable({ date, section, handleQtyChange }) {
       );
       const json = await response.json();
       setJobs(json);
-      setFilteredJobs(json);
+      filter(json);
     } catch (error) {
       console.error(error);
     }
   };
 
   useEffect(() => {
-    // console.log(section);
+    console.log(section);
     getHrJobPending();
   }, []);
 
   useEffect(() => {
+    calculateTotal();
+  }, [filteredJobs]);
+
+  useEffect(() => {
+    filter();
+  }, [date, section]);
+
+  function filter(data = jobs) {
     if ((date !== "") & (section !== "all")) {
-      const filteredObjects = jobs.filter(
+      const filteredObjects = data.filter(
         (job) => (job.created_date == date) & (job.section_id == section)
       );
       setFilteredJobs(filteredObjects);
     } else if (section !== "all") {
-      const filteredObjects = jobs.filter((job) => job.section_id == section);
+      const filteredObjects = data.filter((job) => job.section_id == section);
       setFilteredJobs(filteredObjects);
     } else if (date !== "") {
-      const filteredObjects = jobs.filter((job) => job.created_date == date);
+      const filteredObjects = data.filter((job) => job.created_date == date);
       setFilteredJobs(filteredObjects);
     } else {
-      setFilteredJobs(jobs);
+      setFilteredJobs(data);
     }
-  }, [date, section]);
+  }
+
+  function calculateTotal() {
+    let totalQty = 0;
+    let totalAvl = 0;
+    filteredJobs.map((job) => {
+      totalQty += job.qty;
+      totalAvl += job.transferred_to_hr - job.invoiceQty;
+      return 0;
+    });
+    setTotalQty(totalQty);
+    setTotalAvl(totalAvl);
+  }
 
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: "100%" }}>
         <TableHead>
+          <TableRow>
+            <TableCell
+              colSpan={8}
+              align="right"
+              sx={{
+                fontSize: "17px",
+                padding: "10px 7px",
+                fontWeight: "bold",
+                color: "Green",
+              }}
+            >
+              Total:
+            </TableCell>
+            <TableCell
+              sx={{
+                fontSize: "17px",
+                fontWeight: "bold",
+                color: "Green",
+                borderRight: "1px solid #1565C0", // specify the border style and color
+              }}
+            >
+              {totalQty}
+            </TableCell>
+            <TableCell
+              sx={{
+                fontSize: "17px",
+                fontWeight: "bold",
+                color: "Green",
+                borderRight: "1px solid #1565C0", // specify the border style and color
+              }}
+            >
+              {totalAvl}
+            </TableCell>
+            <TableCell
+              sx={{
+                fontSize: "17px",
+                fontWeight: "bold",
+                color: "Green",
+              }}
+            >
+              {totalSellQty}
+            </TableCell>
+          </TableRow>
           <TableRow>
             <TableCell sx={{ fontSize: "10px", padding: "10px 7px" }}>
               Category
@@ -208,7 +273,7 @@ function SellOrDisposeTable({ date, section, handleQtyChange }) {
                 >
                   <input
                     className={styles.tableInputQty}
-                    type="number"
+                    type="tel"
                     // value={""}
                     onChange={(event) =>
                       handleTableQtyChange(

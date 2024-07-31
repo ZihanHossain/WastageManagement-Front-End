@@ -20,6 +20,7 @@ function SellOrDispose() {
   const [startDate, setStartDate] = useState("");
   const [formatedDate, setFormatedDate] = useState("");
   const [sectionFilter, setSectionFilter] = useState("all");
+  const [totalSellQty, setTotalSellQty] = useState(0);
 
   // const toggleRefreshTable = () => {
   //   setRefreshTable(!refreshTable);
@@ -67,12 +68,21 @@ function SellOrDispose() {
   };
 
   const handleQtyChange = (event, id, availableQty) => {
-    if (event.target.value > 0) {
+    const value = parseFloat(event.target.value);
+
+    if (value === 0 || event.target.value === "") {
+      // Remove the record if value is 0 or an empty string
+      const updatedSellDetails = sellDetails.filter(
+        (obj) => obj.jobDetailsId !== id
+      );
+      setSellDetails(updatedSellDetails);
+      event.target.value = ""; // Optional: Clear the input field if you want
+    } else if (value > 0) {
       if (sellDetails.length < 1) {
         setSellDetails([
           {
             jobDetailsId: id,
-            sellQty: event.target.value,
+            sellQty: value,
             availableQty,
             price: "0",
           },
@@ -82,7 +92,7 @@ function SellOrDispose() {
           if (obj.jobDetailsId === id) {
             return {
               ...obj,
-              sellQty: event.target.value,
+              sellQty: value,
               availableQty,
               price: "0",
             };
@@ -95,7 +105,7 @@ function SellOrDispose() {
         if (!existingObj) {
           newData.push({
             jobDetailsId: id,
-            sellQty: event.target.value,
+            sellQty: value,
             availableQty: availableQty,
             price: "0",
           });
@@ -107,6 +117,19 @@ function SellOrDispose() {
       event.target.value = "";
     }
   };
+
+  function calculateTotalSellQty() {
+    let totalSellQty = 0;
+    sellDetails.map((item) => {
+      totalSellQty += item.sellQty;
+      return 0;
+    });
+    setTotalSellQty(totalSellQty);
+  }
+
+  useEffect(() => {
+    calculateTotalSellQty();
+  }, [sellDetails]);
 
   // const handlePriceChange = (event, id) => {
   //   if (event.target.value > 0) {
@@ -355,6 +378,7 @@ function SellOrDispose() {
             // handlePriceChange={handlePriceChange}
             date={formatedDate}
             section={sectionFilter}
+            totalSellQty={totalSellQty}
             key={refreshTable}
           />
         </div>
