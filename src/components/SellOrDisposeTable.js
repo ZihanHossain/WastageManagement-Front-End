@@ -109,7 +109,7 @@ function SellOrDisposeTable({ date, section, handleQtyChange, totalSellQty }) {
                 borderRight: "1px solid #1565C0", // specify the border style and color
               }}
             >
-              {totalQty}
+              {totalQty.toFixed(2)}
             </TableCell>
             <TableCell
               sx={{
@@ -119,7 +119,7 @@ function SellOrDisposeTable({ date, section, handleQtyChange, totalSellQty }) {
                 borderRight: "1px solid #1565C0", // specify the border style and color
               }}
             >
-              {totalAvl}
+              {totalAvl.toFixed(2)}
             </TableCell>
             <TableCell
               sx={{
@@ -128,7 +128,7 @@ function SellOrDisposeTable({ date, section, handleQtyChange, totalSellQty }) {
                 color: "Green",
               }}
             >
-              {totalSellQty}
+              {totalSellQty.toFixed(2)}
             </TableCell>
           </TableRow>
           <TableRow>
