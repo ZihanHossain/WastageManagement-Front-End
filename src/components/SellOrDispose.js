@@ -70,14 +70,14 @@ function SellOrDispose() {
   const handleQtyChange = (event, id, availableQty) => {
     const value = parseFloat(event.target.value);
 
-    if (value === 0 || event.target.value === "") {
+    if (event.target.value === "") {
       // Remove the record if value is 0 or an empty string
       const updatedSellDetails = sellDetails.filter(
         (obj) => obj.jobDetailsId !== id
       );
       setSellDetails(updatedSellDetails);
       event.target.value = ""; // Optional: Clear the input field if you want
-    } else if (value > 0) {
+    } else if (value >= 0) {
       if (sellDetails.length < 1) {
         setSellDetails([
           {
@@ -237,7 +237,11 @@ function SellOrDispose() {
     }
   };
 
-  const formateDate = (date) => {
+  const formatDate = (date) => {
+    if (!date) {
+      return "";
+    }
+
     const startDate = new Date(date);
     const year = startDate.getFullYear();
     const month = String(startDate.getMonth() + 1).padStart(2, "0"); // Months are zero-based, so add 1
@@ -248,7 +252,7 @@ function SellOrDispose() {
 
   const handleDateChange = (date) => {
     setStartDate(date);
-    setFormatedDate(formateDate(date));
+    setFormatedDate(formatDate(date));
   };
 
   useEffect(() => {
@@ -366,7 +370,7 @@ function SellOrDispose() {
 
         <div className={styles.rowItemSellButton}>
           <Button variant="contained" onClick={onSellPress}>
-            Dispose -
+            Dispose/Sell -
             <RecyclingIcon sx={{ color: "#FFFFFF", fontSize: 25 }} />
           </Button>
         </div>

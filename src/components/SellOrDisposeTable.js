@@ -34,16 +34,15 @@ function SellOrDisposeTable({ date, section, handleQtyChange, totalSellQty }) {
           },
         }
       );
-      const json = await response.json();
-      setJobs(json);
-      filter(json);
+      const data = await response.json();
+      setJobs(data);
+      filter(data);
     } catch (error) {
       console.error(error);
     }
   };
 
   useEffect(() => {
-    console.log(section);
     getHrJobPending();
   }, []);
 
@@ -90,7 +89,7 @@ function SellOrDisposeTable({ date, section, handleQtyChange, totalSellQty }) {
         <TableHead>
           <TableRow>
             <TableCell
-              colSpan={8}
+              colSpan={9}
               align="right"
               sx={{
                 fontSize: "17px",
@@ -133,6 +132,9 @@ function SellOrDisposeTable({ date, section, handleQtyChange, totalSellQty }) {
           </TableRow>
           <TableRow>
             <TableCell sx={{ fontSize: "10px", padding: "10px 7px" }}>
+              Date
+            </TableCell>
+            <TableCell sx={{ fontSize: "10px", padding: "10px 7px" }}>
               Category
             </TableCell>
             <TableCell sx={{ fontSize: "10px", padding: "10px 7px" }}>
@@ -174,6 +176,15 @@ function SellOrDisposeTable({ date, section, handleQtyChange, totalSellQty }) {
           {filteredJobs.map((job) => {
             return (
               <TableRow>
+                <TableCell
+                  sx={{
+                    fontSize: "10px",
+                    fontWeight: "bold",
+                    padding: "10px 10px 10px 10px",
+                  }}
+                >
+                  {job.created_date}
+                </TableCell>
                 <TableCell
                   sx={{
                     fontSize: "10px",
