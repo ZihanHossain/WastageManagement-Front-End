@@ -1,0 +1,27 @@
+.mainSection {
+  margin: 1%;
+}
+
+.workSection {
+  width: 100%;
+}
+
+.row {
+  display: flex;
+  justify-content: space-around;
+}
+
+.heading {
+  margin-bottom: 1%;
+}
+
+.headingText {
+  font-weight: bold;
+  font-size: large;
+  color: #008000;
+}
+
+.left {
+  border: 1px solid;
+  width: 40%;
+}

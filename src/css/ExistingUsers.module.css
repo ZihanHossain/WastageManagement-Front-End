@@ -1,0 +1,63 @@
+.box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60%;
+  background-color: #f5ecec;
+  border: 2px solid #000;
+  padding: 2%;
+  /* boxshadow: 24;
+  p: 4; */
+}
+
+.boxLegend {
+  font-weight: bold !important;
+}
+
+.inputBoxDetails {
+  display: flex;
+}
+
+.inputRow {
+  display: flex;
+  padding-top: 2%;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.inputBoxI {
+  width: 47%;
+  margin: 0 2% 0 2%;
+}
+
+.inputBoxLeft {
+  width: 65%;
+  align-content: space-around;
+}
+
+.inputBoxRight {
+  width: 33%;
+  margin-left: 2%;
+}
+
+.listL {
+  font-weight: 600;
+}
+
+.listBox {
+  max-width: 360px;
+  overflow: auto;
+  max-height: 150px;
+  margin-top: 2px !important;
+  background-color: azure;
+}
+
+.button {
+  display: flex;
+}
+
+.topButtons {
+  display: flex;
+  justify-content: end;
+}

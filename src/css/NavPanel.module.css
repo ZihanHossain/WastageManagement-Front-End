@@ -29,7 +29,7 @@ body {
 .navLink {
   display: flex;
   padding: 5%;
-  padding-left: 10%;
+  /* padding-left: 10%; */
   align-items: center;
   text-decoration: none;
 }
@@ -43,12 +43,12 @@ body {
 .navLinkDropdown {
   display: flex;
   padding: 5%;
-  padding-left: 15%;
+  padding-left: 10%;
   align-items: center;
   text-decoration: none;
 }
 
-.navlinkDropdown:hover {
+.navLinkDropdown:hover {
   background-color: beige;
 }
 
@@ -63,10 +63,28 @@ body {
   font-size: medium;
 }
 
+.navLinkDropdownText {
+  margin-left: 5%;
+  color: #95775d;
+  font-size: small;
+}
+
 .navLinkSelected {
   display: flex;
   padding: 5%;
   padding-left: 10%;
+  align-items: center;
+  text-decoration: none;
+  background-color: white;
+  border-right: 5px solid #00abe4; /* Added 'solid' and '1px' for example */
+  border-top-right-radius: 1000px;
+  border-bottom-right-radius: 1000px;
+}
+
+.navLinkDropdownSelected {
+  display: flex;
+  padding: 5%;
+  padding-left: 15%;
   align-items: center;
   text-decoration: none;
   background-color: white;

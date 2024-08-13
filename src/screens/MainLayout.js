@@ -8,6 +8,7 @@ import { NotificationContainer } from "react-notifications";
 import SellOrDispose from "../components/SellOrDispose";
 import { useNavigate } from "react-router-dom";
 import Reports from "../components/Reports";
+import Users from "../components/Users";
 
 function MainLayout() {
   const navigate = useNavigate();
@@ -40,6 +41,8 @@ function MainLayout() {
                 return <SellOrDispose />;
               case renderedComponent === "reports":
                 return <Reports />;
+              case renderedComponent === "add_user":
+                return <Users />;
               default:
                 return null;
             }

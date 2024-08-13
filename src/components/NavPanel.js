@@ -4,12 +4,18 @@ import { Link, useLocation } from "react-router-dom";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import HomeIcon from "@mui/icons-material/Home";
 import AddCircleOutlinedIcon from "@mui/icons-material/AddCircleOutlined";
+import SettingsApplicationsIcon from "@mui/icons-material/SettingsApplications";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import SellIcon from "@mui/icons-material/Sell";
 import MoveUpIcon from "@mui/icons-material/MoveUp";
 import DocumentScannerIcon from "@mui/icons-material/DocumentScanner";
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import AccountTreeIcon from "@mui/icons-material/AccountTree";
 
 const NavPanel = ({ onSetRender }) => {
   const [navSelected, setNavSelected] = useState("");
+  const [showDropdown, setShowDropdown] = useState("");
 
   const handleNavClick = (component) => {
     onSetRender(component);
@@ -77,27 +83,11 @@ const NavPanel = ({ onSetRender }) => {
         <DocumentScannerIcon sx={{ color: "#00ABE4", fontSize: 20 }} />
         <div className={styles.navLinkText}>Reports</div>
       </Link>
-      {/* <Link
-        to="/add_high_defects"
-        className={
-          location.pathname === "/add_high_defects"
-            ? styles.navLinkSelected
-            : styles.navLink
-        }
-      >
-        <PriorityHighIcon sx={{ color: "#00ABE4", fontSize: 20 }} />
-        <div className={styles.navLinkText}>No of High Defects</div>
-      </Link> */}
-
-      {/* <div
+      <div
         onClick={() =>
           setShowDropdown(showDropdown == "settings" ? "" : "settings")
         }
-        className={
-          location.pathname === "/configuration"
-            ? styles.navLinkSelected
-            : styles.navLink
-        }
+        className={styles.navLink}
       >
         <SettingsApplicationsIcon sx={{ color: "#00ABE4", fontSize: 20 }} />
         <div className={styles.navLinkText}>Settings</div>
@@ -126,53 +116,31 @@ const NavPanel = ({ onSetRender }) => {
             }}
           />
         )}
-      </div> */}
-      {/* <div style={{ display: showDropdown === "settings" ? "block" : "none" }}>
+      </div>
+      <div style={{ display: showDropdown === "settings" ? "block" : "none" }}>
         <Link
-          to="/add_user"
+          onClick={() => handleNavClick("add_user")}
           className={
-            location.pathname === "/configuration"
-              ? styles.navLinkSelected
-              : "nav-link-dropdown"
+            navSelected === "add_user"
+              ? styles.navLinkDropdownSelected
+              : styles.navLinkDropdown
           }
         >
           <PersonAddIcon sx={{ color: "#00ABE4", fontSize: 20 }} />
-          <div className={styles.navLinkText}>Add User</div>
+          <div className={styles.navLinkDropdownText}>Add User</div>
         </Link>
         <Link
-          to="/user_permission"
+          onClick={() => handleNavClick("user_permission")}
           className={
-            location.pathname === "/configuration"
-              ? styles.navLinkSelected
-              : "nav-link-dropdown"
+            navSelected === "user_permission"
+              ? styles.navLinkDropdownSelected
+              : styles.navLinkDropdown
           }
         >
           <AccountTreeIcon sx={{ color: "#00ABE4", fontSize: 20 }} />
-          <div className={styles.navLinkText}>User Permissions</div>
+          <div className={styles.navLinkDropdownText}>User Permissions</div>
         </Link>
-        <Link
-          to="/add_machines"
-          className={
-            location.pathname === "/configuration"
-              ? styles.navLinkSelected
-              : "nav-link-dropdown"
-          }
-        >
-          <PrecisionManufacturingIcon sx={{ color: "#00ABE4", fontSize: 20 }} />
-          <div className={styles.navLinkText}>Add Machines</div>
-        </Link>
-        <Link
-          to="/add_defects"
-          className={
-            location.pathname === "/configuration"
-              ? styles.navLinkSelected
-              : "nav-link-dropdown"
-          }
-        >
-          <AnnouncementIcon sx={{ color: "#00ABE4", fontSize: 20 }} />
-          <div className={styles.navLinkText}>Add Defects</div>
-        </Link>
-      </div> */}
+      </div>
     </div>
   );
 };
