@@ -12,24 +12,44 @@ import MoveUpIcon from "@mui/icons-material/MoveUp";
 import DocumentScannerIcon from "@mui/icons-material/DocumentScanner";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import AccountTreeIcon from "@mui/icons-material/AccountTree";
+import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
+import { Button, Divider } from "@mui/material";
+import UserProfileSettings from "./UserProfileSettings";
 
 const NavPanel = ({ onSetRender }) => {
   const [navSelected, setNavSelected] = useState("");
   const [showDropdown, setShowDropdown] = useState("");
+  const [isUserSetOpen, setIsUserSetOpen] = useState(false);
 
   const handleNavClick = (component) => {
     onSetRender(component);
     setNavSelected(component);
   };
 
+  const handleUserSetOpen = (status) => {
+    setIsUserSetOpen(status);
+  };
+
   return (
     <div className={styles.navSection}>
-      <div className={styles.navUserName}>
-        <AccountBoxIcon sx={{ color: "#00ABE4", fontSize: 45 }} />
-        <div className={styles.navLinkText}>
-          {localStorage.getItem("full_name")}
+      <div className={styles.navTop}>
+        <div className={styles.navUserName}>
+          <AccountBoxIcon sx={{ color: "#00ABE4", fontSize: 45 }} />
+          <div className={styles.navUserNameText}>
+            {localStorage.getItem("full_name")}
+          </div>
+        </div>
+        <div className={styles.userSettings}>
+          <Button
+            sx={{ padding: "1%", minWidth: "40px" }}
+            onClick={() => handleUserSetOpen(true)}
+          >
+            <ManageAccountsIcon sx={{ color: "#1976D2", fontSize: 25 }} />
+          </Button>
         </div>
       </div>
+      <Divider color="#BDA590" sx={{ height: "2px" }} />
+
       <Link
         // to="/final_inspection"
         onClick={handleNavClick}
@@ -141,6 +161,12 @@ const NavPanel = ({ onSetRender }) => {
           <div className={styles.navLinkDropdownText}>User Permissions</div>
         </Link>
       </div>
+      {isUserSetOpen ? (
+        <UserProfileSettings
+          isOpen={isUserSetOpen}
+          handleClose={handleUserSetOpen}
+        />
+      ) : null}
     </div>
   );
 };

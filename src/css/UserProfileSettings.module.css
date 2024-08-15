@@ -1,0 +1,33 @@
+.box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 35%;
+  background-color: #f5ecec;
+  border: 2px solid #000;
+  padding: 2%;
+  box-shadow: 24px;
+}
+
+.boxLegend {
+  font-weight: bold !important;
+}
+
+.inputBoxDetails {
+  display: block;
+}
+
+.inputRow {
+  display: flex;
+  padding-top: 2%;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.saveButton {
+  display: flex;
+  padding-top: 2%;
+  width: 100%;
+  justify-content: end;
+}

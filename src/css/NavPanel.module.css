@@ -19,11 +19,28 @@ body {
   }
 }
 
+.navTop {
+  background-color: #b7bbb7;
+}
+
+.navUserNameText {
+  color: green;
+  font-weight: bold;
+  font-size: medium;
+}
+
 .navUserName {
   display: flex;
   padding: 10%;
   padding-left: 7%;
+  padding-bottom: 2%;
   align-items: center;
+}
+
+.userSettings {
+  display: flex;
+  width: 100%;
+  justify-content: center;
 }
 
 .navLink {
