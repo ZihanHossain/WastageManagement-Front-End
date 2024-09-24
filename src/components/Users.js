@@ -10,7 +10,7 @@ function AddUser() {
       .getItem("userPermission")
       ?.split(/\s*,\s*/);
 
-    if (permissions && permissions.includes("transfer_to_hr_screen")) {
+    if (permissions && permissions.includes("admin_user_setting")) {
       setAuthorized(true);
     } else {
       setAuthorized(false);
